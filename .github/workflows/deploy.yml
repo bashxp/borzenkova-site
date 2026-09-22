@@ -1,0 +1,81 @@
+name: Публикация на borzenkova.ru
+
+# Любое изменение, попавшее в main, собирается, проверяется и выкладывается.
+# Pull Request только собирается и проверяется — зелёная/красная галка
+# показывает, можно ли его сливать; публикация случится после слияния.
+#
+# Сломанная сборка или проверка (scripts/verify-dist.sh) останавливает всё до
+# rsync: на сайте остаётся прошлая версия.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DEPLOY_HOST: 155.212.165.91
+  DEPLOY_USER: borzenkova-deploy
+  # Ключ хоста сервера, сверен с ssh-keyscan. Жёсткая проверка вместо
+  # StrictHostKeyChecking=no: ключ деплоя не уйдёт на подменённый сервер.
+  DEPLOY_KNOWN_HOST: "155.212.165.91 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTX9o3X2wxlwL31vWylAJL700ypqvj1vw5kKj8dX10M"
+
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+
+  deploy:
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-prod
+      cancel-in-progress: false
+    steps:
+      # Ровно тот коммит, который запушили: «Re-run» старого прогона = откат на него.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+
+      - name: Выложить на сервер
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$DEPLOY_KNOWN_HOST" > ~/.ssh/known_hosts
+          # Ключ на сервере зажат в rrsync: пишет только в /var/www/borzenkova.ru,
+          # путь назначения задаётся там, поэтому здесь после «:» пусто.
+          rsync -rtpz --delete --chmod=D755,F644 \
+            -e "ssh -i ~/.ssh/deploy -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:"
+          rm -f ~/.ssh/deploy
+
+      - name: Проверить, что на сайте новая версия
+        run: |
+          js=$(grep -o 'assets/index-[^"]*\.js' dist/index.html | head -1)
+          for i in 1 2 3 4 5; do
+            if curl -fsS -m 20 https://borzenkova.ru/ | grep -q "$js"; then
+              echo "✓ borzenkova.ru отдаёт свежую сборку ($js)"
+              exit 0
+            fi
+            sleep 3
+          done
+          echo "✗ файлы выложены, но borzenkova.ru не отдаёт новую сборку" >&2
+          exit 1
