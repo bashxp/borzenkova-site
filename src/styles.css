@@ -78,7 +78,7 @@ footer{grid-template-columns:1fr auto}
 .principlePhoto img{object-fit:contain}
 .aboutPhoto img{width:100%;height:720px;object-fit:contain}
 @media(max-width:800px){.sectionInsetPhoto{height:480px}.sectionInsetPhoto.wideCrop{height:auto}.principlePhoto{height:520px}.aboutPhoto img{height:620px}}
-.hero{background-color:#102d2f;background-image:url('/assets/olga-legal-practice.webp');background-size:contain;background-position:right center;background-repeat:no-repeat}
+.hero{background-color:#102d2f;background-image:url('/assets/olga-hero-cartier-love.jpg');background-size:contain;background-position:right center;background-repeat:no-repeat}
 .hero::before{display:none}
 @media(max-width:800px){header{overflow:visible}.menuButton{display:none}nav,nav.open{display:flex;position:absolute;top:66px;left:0;right:0;padding:8px;background:rgba(245,240,232,.96);border-radius:18px;flex-direction:row;align-items:center;gap:4px;overflow-x:auto;box-shadow:0 12px 28px rgba(0,0,0,.15)}nav a{white-space:nowrap;padding:10px 12px;font-size:12px}.navCta{padding:10px 14px;border-radius:18px}.heroCopy{padding-top:220px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.post{transition:none}}
