@@ -82,3 +82,11 @@ footer{grid-template-columns:1fr auto}
 .hero::before{display:none}
 @media(max-width:800px){header{overflow:visible}.menuButton{display:none}nav,nav.open{display:flex;position:absolute;top:66px;left:0;right:0;padding:8px;background:rgba(245,240,232,.96);border-radius:18px;flex-direction:row;align-items:center;gap:4px;overflow-x:auto;box-shadow:0 12px 28px rgba(0,0,0,.15)}nav a{white-space:nowrap;padding:10px 12px;font-size:12px}.navCta{padding:10px 14px;border-radius:18px}.heroCopy{padding-top:220px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.post{transition:none}}
+
+/* Главная фраза на первом экране */
+.hero:has(.heroPromise){padding-top:0;padding-bottom:0;align-items:center}
+.hero:has(.heroPromise) .heroCopy{padding:155px 0 70px}
+.hero h1.heroPromise{max-width:min(650px,54%);font-size:clamp(42px,4.7vw,68px);font-weight:400;line-height:1.05;letter-spacing:-.035em;margin-bottom:25px;text-wrap:balance}
+.heroPromise span{color:var(--sand)}
+.heroPromiseContinuation{max-width:min(505px,54%);font-size:22px;line-height:1.5;color:rgba(255,255,255,.9);margin-bottom:18px}
+@media(max-width:800px){.hero:has(.heroPromise) .heroCopy{width:100%;padding:175px 0 45px}.hero h1.heroPromise{font-size:clamp(37px,8vw,54px);max-width:580px;letter-spacing:-.025em}.heroPromiseContinuation{font-size:19px;max-width:470px}}
