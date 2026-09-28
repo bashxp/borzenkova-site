@@ -145,5 +145,8 @@ footer{grid-template-columns:1fr auto}
 .pricingDetails{font-size:16px;line-height:1.5;margin:0 0 24px}
 .pricingCta{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid currentColor;padding-top:18px;margin-top:auto;font-size:15px;font-weight:700}
 .pricingCta svg{flex-shrink:0}
+nav a.navPrice{background:#a64f38;color:#fff;border:1px solid #a64f38;border-radius:18px;padding:10px 14px}
+nav a.navPrice:hover{background:#873e2b;color:#fff}
+nav a.navPrice:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 @media(max-width:1000px){.pricingCard{padding:24px}.pricingCard h3{font-size:25px}.pricingOptions dd{font-size:31px}}
 @media(max-width:800px){.pricingGrid{grid-template-columns:1fr;margin-top:30px}.pricingCard h3{min-height:0;margin-bottom:20px}.pricingCta{margin-top:14px}}
