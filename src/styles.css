@@ -31,7 +31,7 @@
 @media(max-width:800px){.contact{grid-template-columns:1fr;gap:38px}.contactForm{padding:25px 20px;width:100%}}
 
 .heroActions{display:flex;flex-wrap:wrap;gap:14px}.button.outline{border:1px solid rgba(255,255,255,.65);color:#fff;background:rgba(24,56,58,.22)}
-.heroActions .button[href="#personal"]{background:#9bcfe5;border:1px solid #9bcfe5;color:#18383a}
+.heroActions .button[href="#personal"]{background:var(--personal);border:1px solid var(--personal);color:var(--petrol)}
 .heroActions .button[href="#business"]{background:var(--sage);border:1px solid var(--sage);color:var(--petrol)}
 .heroActions .button[href="#psychologist-law"]{background:#a64f38;border:1px solid #a64f38;color:#fff}
 .heroActions .button:hover{filter:brightness(.93)}
