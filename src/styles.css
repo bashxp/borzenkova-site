@@ -132,6 +132,28 @@ footer{grid-template-columns:1fr auto}
 
 .aboutFact p+p{margin-top:7px}
 
+/* Полный перечень услуг для бизнеса */
+.businessServices{margin-top:40px}
+.businessServicesHint{font-size:15px;color:var(--sand);margin:0 0 22px}
+.businessServiceGroup{border-top:1px solid rgba(245,240,232,.3)}
+.businessServiceGroup:last-child{border-bottom:1px solid rgba(245,240,232,.3)}
+.businessServiceGroup summary{display:flex;align-items:center;gap:22px;padding:28px 0;cursor:pointer;list-style:none}
+.businessServiceGroup summary::-webkit-details-marker{display:none}
+.businessServiceGroup summary:focus-visible,.businessGroupCta:focus-visible{outline:2px solid var(--sand);outline-offset:6px}
+.businessGroupNumber{font-size:14px;color:var(--sand);flex-shrink:0}
+.businessGroupTitle{font-size:clamp(22px,2.2vw,32px);line-height:1.25;flex:1;min-width:0}
+.businessGroupCount{font-size:14px;color:var(--sand);white-space:nowrap}
+.businessGroupChevron{flex-shrink:0;transition:transform .2s}
+.businessServiceGroup[open] .businessGroupChevron{transform:rotate(90deg)}
+.businessGroupContent{padding:0 0 32px 42px}
+.businessServiceList{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 40px}
+.businessServiceList li{border-top:1px solid rgba(245,240,232,.12);padding-top:20px;min-width:0}
+.businessServiceList h3{font-family:inherit;font-size:19px;line-height:1.4;margin:0 0 8px;font-weight:600}
+.businessServiceList p{font-size:16px;line-height:1.6;color:var(--sand);margin:0}
+.businessGroupCta{display:inline-flex;align-items:center;gap:24px;background:var(--ivory);color:var(--petrol);padding:14px 22px;border-radius:30px;margin-top:28px;font-size:16px;font-weight:600}
+.businessGroupCta:hover{background:var(--sand)}
+@media(max-width:800px){.businessServices{margin-top:24px}.businessServiceGroup summary{gap:12px;padding:24px 0;flex-wrap:wrap}.businessGroupTitle{font-size:22px;flex-basis:calc(100% - 76px)}.businessGroupCount{margin-left:32px;order:1}.businessGroupContent{padding-left:0}.businessServiceList{grid-template-columns:1fr;gap:18px}.businessServiceList h3{font-size:18px}.businessGroupChevron{width:20px}.businessGroupCta{margin-top:24px}}
+
 /* Стоимость по трём направлениям */
 .pricing{background:var(--ivory)}
 .pricingGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:44px}
