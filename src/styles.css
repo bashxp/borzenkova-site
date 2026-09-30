@@ -132,6 +132,17 @@ footer{grid-template-columns:1fr auto}
 
 .aboutFact p+p{margin-top:7px}
 
+.divorceSupport{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:48px;margin-top:32px;padding:40px;border-radius:24px;background:var(--ivory);border:1px solid var(--sand);color:var(--petrol)}
+.divorceIntro h3{font-size:clamp(32px,3vw,46px);line-height:1.15;margin:20px 0}
+.divorceIntro>p:not(.eyebrow),.divorceDetails p{font-size:16px;line-height:1.6}
+.divorceIntro .button{margin-top:22px}
+.divorceDetails ul{list-style:none;margin:0;padding:0}
+.divorceDetails li+li{border-top:1px solid var(--sand);padding-top:18px;margin-top:18px}
+.divorceDetails h4{font-size:19px;line-height:1.35;margin:0 0 8px}
+.divorceDetails p{margin:0;color:#566163}
+.divorceDetails .divorceNote{font-size:14px;margin-top:24px}
+@media(max-width:800px){.divorceSupport{grid-template-columns:1fr;gap:28px;padding:24px}.divorceIntro h3{font-size:34px}.divorceIntro .button{width:100%;justify-content:center}}
+
 /* Полный перечень услуг для бизнеса */
 .businessServices{margin-top:40px}
 .businessServicesHint{font-size:15px;color:var(--sand);margin:0 0 22px}
