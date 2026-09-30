@@ -156,10 +156,17 @@ footer{grid-template-columns:1fr auto}
 
 /* Стоимость по трём направлениям */
 .pricing{background:var(--ivory)}
-.pricingGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:44px}
+.pricingGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:44px}
 .pricingCard{padding:32px;border-radius:28px;display:flex;flex-direction:column;min-width:0}
 .pricingPersonal{background:var(--personal);color:var(--petrol)}
-.pricingBusiness{background:var(--petrol);color:var(--ivory)}
+.pricingBusiness{background:var(--petrol);color:var(--ivory);grid-column:1/-1;order:3}
+.pricingBusiness .businessServices{margin-top:12px}
+.businessPriceList{margin:0}
+.businessPriceList>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,.6fr);gap:24px;padding:18px 0;border-top:1px solid rgba(245,240,232,.2)}
+.businessPriceList dt{font-size:17px;line-height:1.5}
+.businessPriceList dd{margin:0;font-size:18px;line-height:1.5;font-weight:600;text-align:right}
+.businessPriceNote{font-size:15px;line-height:1.6;color:var(--sand);margin:22px 0 0}
+@media(max-width:800px){.businessPriceList>div{grid-template-columns:1fr;gap:8px}.businessPriceList dd{text-align:left}.pricingBusiness .businessGroupTitle{font-size:20px}}
 .pricingLegal{background:var(--copper);color:#231a16}
 .pricingCard h3{font-size:29px;line-height:1.15;min-height:68px;margin:0 0 22px}
 .pricingLegal h3{color:#fff}
