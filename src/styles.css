@@ -196,3 +196,22 @@ nav a.navPrice:hover{background:#873e2b;color:#fff}
 nav a.navPrice:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 @media(max-width:1000px){.pricingCard{padding:24px}.pricingCard h3{font-size:25px}.pricingOptions dd{font-size:31px}}
 @media(max-width:800px){.pricingGrid{grid-template-columns:1fr;margin-top:30px}.pricingCard h3{min-height:0;margin-bottom:20px}.pricingCta{margin-top:14px}}
+
+/* Обложка и длинный текст новой статьи; без загрузки дополнительных изображений. */
+.firstMeetingCover{position:relative;isolation:isolate;overflow:hidden;border-radius:22px;background:var(--petrol);color:var(--ivory);padding:44px;margin:30px 0 42px}
+.firstMeetingCover::before,.firstMeetingCover::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:420px;height:420px;border:1px solid var(--copper);border-radius:50%;right:-250px;top:-120px;transform:rotate(-20deg)}
+.firstMeetingCover::after{right:-190px;top:auto;bottom:-330px;width:600px;height:600px;background:rgba(181,111,85,.1)}
+.coverKicker{display:block;font-size:11px;letter-spacing:.16em;color:var(--sand);margin-bottom:30px}
+.firstMeetingCover p{font-family:"Times New Roman",Times,serif;font-size:clamp(30px,4vw,48px);line-height:1.16;letter-spacing:-.025em;margin:0 0 28px;max-width:580px;color:var(--ivory)}
+.firstMeetingCover em{font-style:normal;color:#e7b49b}
+.coverFootnote{display:block;font-size:16px;line-height:1.4;color:var(--sand);padding-top:18px;border-top:1px solid rgba(220,205,189,.4);width:fit-content}
+.firstMeetingCoverCompact{margin:-8px -8px 24px;padding:24px 20px;border-radius:16px}
+.firstMeetingCoverCompact .coverKicker{font-size:9px;margin-bottom:20px}
+.firstMeetingCoverCompact p{font-size:27px;line-height:1.15;margin:0 0 20px;color:var(--ivory)}
+.firstMeetingCoverCompact .coverFootnote{font-size:12px;padding-top:12px}
+.articleLongform h1{font-size:clamp(34px,4.5vw,58px);line-height:1.12;letter-spacing:-.035em;overflow-wrap:break-word}
+.articleHeading{font-size:clamp(27px,3.1vw,38px);line-height:1.2;color:var(--petrol);margin:46px 0 20px;letter-spacing:-.02em}
+.articleSource{text-decoration:underline;text-underline-offset:3px;color:var(--petrol)}
+.articleSource:focus-visible,.article .back:focus-visible{outline:2px solid var(--petrol);outline-offset:4px}
+.articleLongform .back{display:inline-block;margin-bottom:24px}
+@media(max-width:600px){.articleLongform{padding:160px 22px 64px}.articleLongform>p:not(.eyebrow):not(.articleLead){font-size:18px;line-height:1.65}.articleLongform .articleLead{font-size:22px}.firstMeetingCover{padding:28px 24px}.firstMeetingCoverCompact{padding:24px 20px}.articleLongform .articleCta{padding:28px 24px}.articleLongform .articleCta h2{font-size:27px}}
