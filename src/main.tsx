@@ -4,6 +4,7 @@ import {ArrowRight, Menu, X, ChevronRight, Send, ShieldCheck, Scale, Users, Brai
 import './styles.css';
 import {firstMeetingPost, type ArticleSection} from './firstMeetingPost';
 import {impostorPost} from './impostorPost';
+import {spotlightPost} from './spotlightPost';
 
 const asset=(name:string)=>`${import.meta.env.BASE_URL}assets/${name}`;
 
@@ -83,8 +84,9 @@ const psychologistLegalSituations=[
  {title:'Реклама и экспертный контент',text:'Проверка формулировок, обещаний результата и границ между психологической и медицинской помощью.'}
 ];
 
-type BlogPost = {slug:string;tag:string;title:string;lead:string;read:string;body:string[];sections?:ArticleSection[];cover?:boolean|'impostor';ctaTitle?:string};
+type BlogPost = {slug:string;tag:string;title:string;lead:string;read:string;body:string[];sections?:ArticleSection[];cover?:boolean|'impostor'|'spotlight';ctaTitle?:string};
 const posts:BlogPost[]=[
+ spotlightPost,
  impostorPost,
  firstMeetingPost,
  {slug:'ne-speshit',tag:'РЕШЕНИЯ',title:'Не спешить — не значит ничего не делать',lead:'Как отделить срочность эмоции от срочности решения и вернуть себе управляемость.',read:'6 минут',body:['В кризисе скорость легко спутать с эффективностью. Чем выше тревога, тем сильнее хочется немедленно закрыть вопрос — подписать, уволить, разорвать партнёрство или согласиться на первый предложенный сценарий.','Пауза нужна не для ухода от решения. Она нужна, чтобы разделить факты, интерпретации, риски и последствия. После этого действие становится не медленнее, а точнее.','Первый шаг — назвать, что именно требует решения сегодня, а что может подождать до появления полной картины.']},
@@ -143,6 +145,7 @@ function Home(){return <><div id="top"/><section className="hero"><Header/><div 
 </main><footer><Logo/><a href="#documents">Документы</a><span>© 2026</span></footer></>}
 
 function PostCover({post,compact=false}:{post:BlogPost;compact?:boolean}){
+ if(post.cover==='spotlight') return <div className={`firstMeetingCover impostorCover${compact?' firstMeetingCoverCompact':''}`}><span className="coverKicker">ЭФФЕКТ ПРОЖЕКТОРА</span><p>Вы ещё не начали.<br/>А вас уже <em>обсуждают?</em></p><span className="coverFootnote">Как отличить чужое внимание от собственного страха.</span></div>;
  if(post.cover!=='impostor') return <FirstMeetingCover compact={compact}/>;
  return <div className={`firstMeetingCover impostorCover${compact?' firstMeetingCoverCompact':''}`}><span className="coverKicker">СИНДРОМ САМОЗВАНЦА</span><p>Вам опять<br/>просто <em>повезло?</em></p><span className="coverFootnote">Ошибка — доказательство. Успех — исключение.</span></div>;
 }
