@@ -215,3 +215,5 @@ nav a.navPrice:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 .articleSource:focus-visible,.article .back:focus-visible{outline:2px solid var(--petrol);outline-offset:4px}
 .articleLongform .back{display:inline-block;margin-bottom:24px}
 @media(max-width:600px){.articleLongform{padding:160px 22px 64px}.articleLongform>p:not(.eyebrow):not(.articleLead){font-size:18px;line-height:1.65}.articleLongform .articleLead{font-size:22px}.firstMeetingCover{padding:28px 24px}.firstMeetingCoverCompact{padding:24px 20px}.articleLongform .articleCta{padding:28px 24px}.articleLongform .articleCta h2{font-size:27px}}
+
+.articleImageCover{display:block;width:100%;height:auto;border-radius:22px;margin:30px 0 42px}.articleImageCoverCompact{margin:0 0 24px;border-radius:16px}.articleLongform>.articleQuestions{max-width:760px;padding-left:1.3em;font-size:19px;line-height:1.75;margin:0 0 28px}.articleQuestions li+li{margin-top:12px}@media(max-width:800px){.articleLongform>.articleQuestions{font-size:18px;line-height:1.65}}

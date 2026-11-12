@@ -5,6 +5,7 @@ import './styles.css';
 import {firstMeetingPost, type ArticleSection} from './firstMeetingPost';
 import {impostorPost} from './impostorPost';
 import {spotlightPost} from './spotlightPost';
+import {ikeaRelationshipsPost} from './ikeaRelationshipsPost';
 
 const asset=(name:string)=>`${import.meta.env.BASE_URL}assets/${name}`;
 
@@ -84,8 +85,9 @@ const psychologistLegalSituations=[
  {title:'Реклама и экспертный контент',text:'Проверка формулировок, обещаний результата и границ между психологической и медицинской помощью.'}
 ];
 
-type BlogPost = {slug:string;tag:string;title:string;lead:string;read:string;body:string[];sections?:ArticleSection[];cover?:boolean|'impostor'|'spotlight';ctaTitle?:string};
+type BlogPost = {slug:string;tag:string;title:string;lead:string;read:string;body:string[];sections?:ArticleSection[];cover?:boolean|'impostor'|'spotlight'|'ikea';ctaTitle?:string};
 const posts:BlogPost[]=[
+ ikeaRelationshipsPost,
  spotlightPost,
  impostorPost,
  firstMeetingPost,
@@ -145,6 +147,7 @@ function Home(){return <><div id="top"/><section className="hero"><Header/><div 
 </main><footer><Logo/><a href="#documents">Документы</a><span>© 2026</span></footer></>}
 
 function PostCover({post,compact=false}:{post:BlogPost;compact?:boolean}){
+ if(post.cover==='ikea') return <img className={`articleImageCover${compact?' articleImageCoverCompact':''}`} src={asset('ikea-relationships-cover.webp')} alt="Я столько вложила. Как теперь уйти?" width={1600} height={900} loading={compact?'lazy':'eager'}/>;
  if(post.cover==='spotlight') return <div className={`firstMeetingCover impostorCover${compact?' firstMeetingCoverCompact':''}`}><span className="coverKicker">ЭФФЕКТ ПРОЖЕКТОРА</span><p>Вы ещё не начали.<br/>А вас уже <em>обсуждают?</em></p><span className="coverFootnote">Как отличить чужое внимание от собственного страха.</span></div>;
  if(post.cover!=='impostor') return <FirstMeetingCover compact={compact}/>;
  return <div className={`firstMeetingCover impostorCover${compact?' firstMeetingCoverCompact':''}`}><span className="coverKicker">СИНДРОМ САМОЗВАНЦА</span><p>Вам опять<br/>просто <em>повезло?</em></p><span className="coverFootnote">Ошибка — доказательство. Успех — исключение.</span></div>;
@@ -163,7 +166,7 @@ function Article({post}:{post:BlogPost}){
   description?.setAttribute('content',post.lead);
   return ()=>{document.title=previousTitle;if(previousDescription!==null&&previousDescription!==undefined)description?.setAttribute('content',previousDescription)};
  },[post]);
- return <><Header/><main className={`article${post.sections?' articleLongform':''}`}><a href="#blog" className="back">← Вернуться в блог</a><p className="eyebrow">{post.tag} · {post.read}</p><h1>{post.title}</h1><p className="articleLead">{post.lead}</p>{post.cover&&<PostCover post={post}/>}{post.sections?post.sections.map((section,index)=>section.heading?<h2 className="articleHeading" key={index}>{section.heading}</h2>:<p key={index}>{section.text}{section.source&&<> <a className="articleSource" href={section.source.url} target="_blank" rel="noreferrer">{section.source.label}</a>.</>}</p>):post.body.map(x=><p key={x}>{x}</p>)}<div className="articleCta"><h2>{post.ctaTitle||'Сложность уже влияет на решение?'}</h2><a className="button copper" href="#contact">Записаться на встречу <ArrowRight size={18}/></a></div></main></>;
+ return <><Header/><main className={`article${post.sections?' articleLongform':''}`}><a href="#blog" className="back">← Вернуться в блог</a><p className="eyebrow">{post.tag} · {post.read}</p><h1>{post.title}</h1><p className="articleLead">{post.lead}</p>{post.cover&&<PostCover post={post}/>}{post.sections?post.sections.map((section,index)=>section.heading?<h2 className="articleHeading" key={index}>{section.heading}</h2>:section.items?<ul className="articleQuestions" key={index}>{section.items.map(item=><li key={item}>{item}</li>)}</ul>:<p key={index}>{section.strong?<strong>{section.text}</strong>:section.text}{section.source&&<> <a className="articleSource" href={section.source.url} target="_blank" rel="noreferrer">{section.source.label}</a>.</>}</p>):post.body.map(x=><p key={x}>{x}</p>)}<div className="articleCta"><h2>{post.ctaTitle||'Сложность уже влияет на решение?'}</h2><a className="button copper" href="#contact">Записаться на встречу <ArrowRight size={18}/></a></div></main></>;
 }
 function App(){const [hash,setHash]=useState(location.hash);useEffect(()=>{const f=()=>setHash(location.hash);addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f)},[]);useEffect(()=>{const frame=requestAnimationFrame(()=>{const target=document.getElementById(hash.slice(1));if(target){target.scrollIntoView()}else{scrollTo(0,0)}});return()=>cancelAnimationFrame(frame)},[hash]);const slug=hash.match(/^#\/blog\/(.+)$/)?.[1];const post=posts.find(p=>p.slug===slug);return post?<Article post={post}/>:<Home/>}
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);

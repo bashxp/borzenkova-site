@@ -1,4 +1,4 @@
-export type ArticleSection = {heading?: string; text?: string; source?: {label: string; url: string}};
+export type ArticleSection = {heading?: string; text?: string; strong?: boolean; items?: string[]; source?: {label: string; url: string}};
 
 export const firstMeetingPost = {
  slug: 'kak-reshitsya-na-vstrechu-s-psihologom',
