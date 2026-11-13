@@ -220,3 +220,7 @@ nav a.navPrice:focus-visible{outline:2px solid currentColor;outline-offset:3px}
 
 /* Полный кадр фотографии в личных вопросах на телефоне. */
 @media(max-width:800px){.personalServices .servicePhotoBackground{flex-direction:column;align-items:stretch;gap:28px;min-height:0;padding:0 24px 44px}.personalServices .servicePhotoBackground .sectionInsetPhoto.wideCrop{position:relative;inset:auto;order:-1;width:100%;height:auto;object-fit:contain;object-position:center}.personalServices .servicePhotoBackground::after{display:none}}
+
+/* Мягкий переход снимка у окна в фон раздела. */
+@media(min-width:801px){.personalServices .servicePhotoBackground .sectionInsetPhoto.wideCrop{left:auto;width:auto;max-width:none;mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%)}}
+@media(max-width:800px){.personalServices .servicePhotoBackground .sectionInsetPhoto.wideCrop{mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 88%,transparent 100%),linear-gradient(180deg,#000 0%,#000 84%,transparent 100%);mask-composite:intersect}}
