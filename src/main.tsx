@@ -6,6 +6,7 @@ import {firstMeetingPost, type ArticleSection} from './firstMeetingPost';
 import {impostorPost} from './impostorPost';
 import {spotlightPost} from './spotlightPost';
 import {ikeaRelationshipsPost} from './ikeaRelationshipsPost';
+import {confirmationBiasPost} from './confirmationBiasPost';
 
 const asset=(name:string)=>`${import.meta.env.BASE_URL}assets/${name}`;
 
@@ -85,8 +86,9 @@ const psychologistLegalSituations=[
  {title:'Реклама и экспертный контент',text:'Проверка формулировок, обещаний результата и границ между психологической и медицинской помощью.'}
 ];
 
-type BlogPost = {slug:string;tag:string;title:string;lead:string;read:string;body:string[];sections?:ArticleSection[];cover?:boolean|'impostor'|'spotlight'|'ikea';ctaTitle?:string};
+type BlogPost = {slug:string;tag:string;title:string;lead:string;read:string;body:string[];sections?:ArticleSection[];cover?:boolean|'impostor'|'spotlight'|'ikea'|'confirmation';ctaTitle?:string};
 const posts:BlogPost[]=[
+ confirmationBiasPost,
  ikeaRelationshipsPost,
  spotlightPost,
  impostorPost,
@@ -144,6 +146,7 @@ function Home(){return <><div id="top"/><section className="hero"><Header/><div 
 </main><footer><Logo/><a href="#documents">Документы</a><span>© 2026</span></footer></>}
 
 function PostCover({post,compact=false}:{post:BlogPost;compact?:boolean}){
+ if(post.cover==='confirmation') return <img className={`articleImageCover${compact?' articleImageCoverCompact':''}`} src={asset('confirmation-bias-cover.webp')} alt="Вам нужен честный ответ. Или согласие?" width={1600} height={900} loading={compact?'lazy':'eager'}/>;
  if(post.cover==='ikea') return <img className={`articleImageCover${compact?' articleImageCoverCompact':''}`} src={asset('ikea-relationships-cover.webp')} alt="Я столько вложила. Как теперь уйти?" width={1600} height={900} loading={compact?'lazy':'eager'}/>;
  if(post.cover==='spotlight') return <div className={`firstMeetingCover impostorCover${compact?' firstMeetingCoverCompact':''}`}><span className="coverKicker">ЭФФЕКТ ПРОЖЕКТОРА</span><p>Вы ещё не начали.<br/>А вас уже <em>обсуждают?</em></p><span className="coverFootnote">Как отличить чужое внимание от собственного страха.</span></div>;
  if(post.cover!=='impostor') return <FirstMeetingCover compact={compact}/>;
